@@ -7,6 +7,7 @@ import com.forum.server.services.interfaces.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,17 +27,21 @@ public class SearchController {
     private SearchService searchService;
 
     @RequestMapping(value = "/themes", method = GET)
-    public ResponseEntity<QueryResultDto> searchThemes(@RequestParam(name = "find") String keyword,
-                                                       @RequestParam(name = "section-id", required = false) Integer sectionId,
-                                                       @RequestParam(name = "subsection-id", required = false) Integer subsectionId) {
-        ThemesDto result = searchService.searchThemes(keyword, sectionId, subsectionId);
+    public ResponseEntity<QueryResultDto> searchThemes(@RequestParam(value = "find") String keyword,
+                                                       @RequestParam(value = "offset", required = false) Integer offset,
+                                                       @RequestParam(value = "count") int count,
+                                                       @RequestParam(value = "section-id", required = false) Integer sectionId,
+                                                       @RequestParam(value = "subsection-id", required = false) Integer subsectionId) {
+        ThemesDto result = searchService.searchThemes(keyword, offset, count, sectionId, subsectionId);
         return buildResponseGet(result);
     }
 
     @RequestMapping(value = "/themes", method = GET)
-    public ResponseEntity<QueryResultDto> searchUsers(@RequestParam(name = "find") String keyword,
-                                                       @RequestParam(name = "Auth-Token") String token) {
-        UsersShortDto result = searchService.searchUsers(keyword, token);
+    public ResponseEntity<QueryResultDto> searchUsers(@RequestParam(value = "find") String keyword,
+                                                      @RequestParam(value = "offset", required = false) Integer offset,
+                                                      @RequestParam(value = "count") int count,
+                                                      @RequestHeader(name = "Auth-Token") String token) {
+        UsersShortDto result = searchService.searchUsers(token, keyword, offset, count);
         return buildResponseGet(result);
     }
 }

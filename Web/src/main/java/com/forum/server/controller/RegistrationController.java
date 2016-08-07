@@ -26,8 +26,8 @@ public class RegistrationController {
     private RegistrationService registrationService;
 
     @RequestMapping(value = "/login", method = POST)
-    public ResponseEntity<QueryResultDto> login(@RequestHeader("identifier") String identifier,
-                                                @RequestHeader("password") String password) {
+    public ResponseEntity<QueryResultDto> login(@RequestHeader(name = "identifier") String identifier,
+                                                @RequestHeader(name = "password") String password) {
         String token = registrationService.login(identifier, password);
         return buildResponseLogin(token);
     }
