@@ -1,6 +1,9 @@
 package com.forum.server.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * 06.08.16
@@ -10,4 +13,9 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class StaticInfoController {
+
+    @RequestMapping(value = "/", method = GET)
+    public String hello() {
+        return "Hello bitches!!!";
+    }
 }

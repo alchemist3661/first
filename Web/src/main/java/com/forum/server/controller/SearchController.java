@@ -36,7 +36,7 @@ public class SearchController {
         return buildResponseGet(result);
     }
 
-    @RequestMapping(value = "/themes", method = GET)
+    @RequestMapping(value = "/users", method = GET)
     public ResponseEntity<QueryResultDto> searchUsers(@RequestParam(value = "find") String keyword,
                                                       @RequestParam(value = "offset", required = false) Integer offset,
                                                       @RequestParam(value = "count") int count,
