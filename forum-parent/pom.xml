@@ -32,6 +32,7 @@
         <module>../DTO</module>
         <module>../Services</module>
         <module>../Web</module>
+        <module>../Security</module>
     </modules>
 
     <build>
